@@ -17,6 +17,9 @@ from keras.models import load_model
 from nltk.stem.lancaster import LancasterStemmer
 from nltk.tokenize import RegexpTokenizer
 import argparse
+
+from os.path import dirname, abspath
+
 def get_parser():
     """Get parser for command line arguments."""
     parser = argparse.ArgumentParser(description="Twitter Downloader")
@@ -34,8 +37,8 @@ if __name__ == '__main__':
 
 
 
-    nn_model_location = 'sentimentNet.h5'
-    wv_model_location = 'GoogleNews-vectors-negative300.bin'
+    nn_model_location = '{}/sentimentNet.h5'.format(dirname(dirname(abspath(__file__))))
+    wv_model_location = '{}/GoogleNews-vectors-negative300.bin'.format(dirname(dirname(abspath(__file__))))
 
 
     with open(data_location,'r', encoding ='utf-8') as t:
