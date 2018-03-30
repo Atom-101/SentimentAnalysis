@@ -17,8 +17,8 @@ from nltk.stem.lancaster import LancasterStemmer
 from nltk.tokenize import RegexpTokenizer
 
 data_location = 'articles.txt' #set this
-nn_model_location = 'sentimentNet.h5'
-wv_model_location = 'GoogleNews-vectors-negative300.bin'
+nn_model_location = '{}/sentimentNet.h5'.format(dirname(dirname(abspath(__file__))))
+wv_model_location = '{}/GoogleNews-vectors-negative300.bin'.format(dirname(dirname(abspath(__file__))))
 
 with open(data_location, 'r', encoding = 'utf-8') as doc:
     sentences=[x.strip().lower() for x in doc.read().split('.')]#corpus equivalent
