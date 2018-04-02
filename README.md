@@ -27,3 +27,7 @@ Before running the project the following python libraries have to be installed:
 The following command can be run:
 pip3 install numpy nltk tqdm Keras tensorflow newspaper tweepy gensim pandas sklearn google-api-python-client
 
+To run this project, google's word2vec binary is required. Download it here:
+"https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit"
+
+After downloading extract the bin file to the project folder.
