@@ -1,4 +1,3 @@
-#from google import search
 import argparse
 import json
 from urllib.request import urlopen

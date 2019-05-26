@@ -12,12 +12,11 @@ for i,url in enumerate(url_list):
 	try:
 		articles.append(Article(url))
 	except:
-	       continue
+	    continue
 	articles[i].download()
 	articles[i].parse()
 
 with open(outfile, 'a', encoding = 'utf-8') as f:
-        for article in articles:
-                f.write(article.text)
-	
-#call doc neural net(ArticleReader.py)
+    for article in articles:
+        f.write(article.text)
+

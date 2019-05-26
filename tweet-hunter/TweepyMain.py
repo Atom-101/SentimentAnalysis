@@ -10,10 +10,8 @@ import json
 
 
 def get_parser():
-    """Get parser for command line arguments."""
     parser = argparse.ArgumentParser(description="Twitter Downloader")
     parser.add_argument("-q", "--query", dest="query", help="Query/Filter", default='-')
-    '''parser.add_argument("-d", "--data-dir", dest="data_dir", help="Output/Data Directory")'''
     return parser
 
 
@@ -23,9 +21,9 @@ class MyListener(StreamListener):
     def __init__(self, query):
         query_fname = format_filename(query)
         self.outfile = "data/stream_%s.json" % (query_fname)
+    
     def on_data(self, data):
-        try:
-            
+        try:            
             with open(self.outfile, 'a') as f:
                 f.write(data)
             print(data)
@@ -41,6 +39,7 @@ class MyListener(StreamListener):
             #returning False in on_data disconnects the stream
             return False
         return True
+    
     def on_status(self, status):
         if (status.retweeted_status):
             return
@@ -49,28 +48,22 @@ class MyListener(StreamListener):
 def format_filename(fname):
     """Convert file name into a safe string.
     Arguments:
-        fname -- the file name to convert
+        fname: the file name to convert
     Return:
-        String -- converted file name
+        The converted file name
     """
     return ''.join(convert_valid(one_char) for one_char in fname)
 
 
 def convert_valid(one_char):
     #Set invalid characters to '_' 
+    #Removes emojis and other characters
     
     valid_chars = "-_.%s%s" % (string.ascii_letters, string.digits)
     if one_char in valid_chars:
         return one_char
     else:
         return '_'
-
-@classmethod
-def parse(cls, api, raw):
-    status = cls.first_parse(api, raw)
-    setattr(status, 'json', json.dumps(raw))
-    return status
-
 
 
 def openStream():	
@@ -86,15 +79,17 @@ def openStream():
     twitter_stream = Stream(auth, MyListener(args.query))
     twitter_stream.filter(track=query)
     ''' time.sleep(60)#keep stream open for 60 seconds
-    closeStream(twitter_stream)
+    closeStream(twitter_stream)'''
 	
+'''
 def closeStream(twitter_stream):
     twitter_stream.disconnect()
     print('closed')
     time.sleep(60*5)#give 5 minutes to allow stream to close completely
     #(call neural net for prediction)
     time.sleep(60*10)#open stream again after 10 minutes
-    openStream()'''
+    openStream()
+'''
 
 if __name__ == '__main__':
   openStream()
